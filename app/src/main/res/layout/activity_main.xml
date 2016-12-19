@@ -20,8 +20,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mainHeaderTextView"
-        android:text="Login"
-        android:id="@+id/mainLoginButton"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Search Spells"
+        android:id="@+id/mainSearchButton"/>
 
 </RelativeLayout>
