@@ -6,17 +6,21 @@
 
 ## Description
 
-
+An application to keep track of the spells your RPG character has learned and prepared.
 
 ## Specs
 
-| BEHAVIOR                                                | INPUT    | OUTPUT   |
-|---------------------------------------------------------|----------|----------|
-| Program navigates to different activities               |          |          |
+| BEHAVIOR                                                   | INPUT    | OUTPUT   |
+|------------------------------------------------------------|----------|----------|
+| Program navigates from MainActivity to SpellSearchActivity |          |          |  
+| Program creates new spellbooks                             |          |          |
+| Program saves spells to spellbooks                         |          |          |
+| Program creates user accounts                              |          |          |
+| Program associates spellbooks with user accounts           |          |          |
 
 ## Setup/Installation Requirements
 
-1. Clone this repository to your desktop `git clone https://github.com/CGrahamS/Game-Chest.git`
+1. Clone this repository to your desktop `git clone https://github.com/CGrahamS/spellbook.git`
 2. Open repository in Android studio.
 3. Confirm Gradle build is successful.
 4. Create a new AVD with the 4" WVGA (Nexus S) profile.

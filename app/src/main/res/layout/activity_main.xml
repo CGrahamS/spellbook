@@ -10,7 +10,18 @@
     tools:context="com.cgrahams.spellbook.MainActivity">
 
     <TextView
+        style="@style/customHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Spellbook"
+        android:id="@+id/mainHeaderTextView"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@+id/mainHeaderTextView"
+        android:text="Login"
+        android:id="@+id/mainLoginButton"/>
+
 </RelativeLayout>

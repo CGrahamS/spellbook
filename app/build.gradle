@@ -3,6 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
+    useLibrary 'org.apache.http.legacy'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
 
     defaultConfig {
         applicationId "com.cgrahams.spellbook"
@@ -22,5 +28,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'org.robolectric:shadows-support-v4:3.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestCompile('com.android.support.test:runner:0.3') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    compile 'com.android.support:appcompat-v7:24+'
+    compile 'com.jakewharton:butterknife:8.4.0'
 }

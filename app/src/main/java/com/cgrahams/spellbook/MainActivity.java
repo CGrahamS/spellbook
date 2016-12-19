@@ -11,3 +11,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 }
+
+
+//TODO Create MainActivity
+//TODO Create SpellSearchActivity
+//TODO Write testing for navigation between MainA and SearchA
+//TODO Create
+//TODO Create database for spells
+//TODO Write testing for selections in SearchA
+//TODO Create SpellSavedActivity

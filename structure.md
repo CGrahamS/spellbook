@@ -1,9 +1,9 @@
 ### Activities
 1. MainActivity
-2. LoginActivity
-3. CreateAccountActivity
-4. SpellSearchActivity +landscape
-5. SpellSavedActivity +landscape
+2. SpellSearchActivity +landscape
+3. SpellSavedActivity +landscape
+4. LoginActivity
+5. CreateAccountActivity
 
 ### Fragments
 1. SpellDetailFragment +landscape
@@ -16,4 +16,4 @@
 
 ### Design
 1. Palette: https://coolors.co/45503b-bb4430-f44336-b7ad99-ffc700
-2. Palette: https://coolors.co/333333-eaf8bf-f44336-1c3144-ffc700
+2. Palette: https://coolors.co/333333-f7f0c3-f44336-1c3144-ffc700
