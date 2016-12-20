@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Spellbook"
+        android:text="@string/HEADER_TEXT"
         android:id="@+id/mainHeaderTextView"/>
 
     <Button
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Search Spells"
+        android:text="@string/MAIN_SEARCH_BUTTON"
         android:id="@+id/mainSearchButton"/>
 
 </RelativeLayout>
