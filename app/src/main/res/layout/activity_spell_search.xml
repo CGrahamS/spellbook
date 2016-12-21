@@ -10,10 +10,10 @@
     tools:context="com.cgrahams.spellbook.SpellSearchActivity">
 
     <fragment
+        android:id="@+id/spellSearchFragment"
         android:name="com.cgrahams.spellbook.SpellSearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/spellSearchFragment"
         tools:layout="@layout/fragment_spell_search"/>
 
 </RelativeLayout>
