@@ -1,8 +1,7 @@
 package com.cgrahams.spellbook;
 
-import android.app.Activity;
 import android.os.Build;
-import android.view.View;
+//import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import org.junit.Before;
@@ -13,7 +12,6 @@ import org.robolectric.annotation.Config;
 
 import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
-import static com.cgrahams.spellbook.support.ViewLocator.getTextView;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
@@ -25,11 +23,13 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
     TextView searchHeaderTextView;
+//    RecyclerView searchRecyclerView;
 
     @Before
     public void setUp() throws Exception {
         startFragment(fragment);
         searchHeaderTextView = (TextView) fragment.getView().findViewById(R.id.searchFragmentHeaderTextView);
+//        searchRecyclerView = (RecyclerView) fragment.getView().findViewById(R.id.searchRecyclerView);
     }
 
     @Test
@@ -41,5 +41,10 @@ public class SpellSearchFragmentTest {
     public void shouldHaveHeader() throws Exception {
         assertViewIsVisible(searchHeaderTextView);
         assertThat(searchHeaderTextView.getText().toString(), equalTo(getString(R.string.SEARCH_HEADER)));
+    }
+
+    @Test
+    public void shouldHaveRecyclerView() throws Exception {
+//        assertViewIsVisible(searchRecyclerView);
     }
 }
