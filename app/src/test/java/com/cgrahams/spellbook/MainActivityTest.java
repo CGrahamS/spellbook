@@ -19,6 +19,8 @@ import butterknife.ButterKnife;
 
 import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
+import static com.cgrahams.spellbook.support.ViewLocator.getButton;
+import static com.cgrahams.spellbook.support.ViewLocator.getTextView;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,18 +33,15 @@ import static org.robolectric.Shadows.*;
 public class MainActivityTest {
     public static final String TAG = MainActivityTest.class.getSimpleName();
 
-    @Bind(R.id.mainHeaderTextView)
-    TextView mainHeaderTextView;
-
-    @Bind(R.id.mainSearchButton)
-    Button mainSearchButton;
     private MainActivity activity;
-
+    private TextView mainHeaderTextView;
+    private Button mainSearchButton;
 
     @Before
     public void setUp() throws Exception {
         activity = Robolectric.setupActivity( MainActivity.class);
-        ButterKnife.bind(this, activity);
+        mainHeaderTextView = getTextView(activity, R.id.mainHeaderTextView);
+        mainSearchButton = getButton(activity, R.id.mainSearchButton);
     }
 
     @Test

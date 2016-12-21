@@ -5,6 +5,7 @@
     tools:context="com.cgrahams.spellbook.SpellSearchFragment">
 
     <TextView
+        android:id="@+id/searchFragmentHeaderTextView"
         style="@style/customHeader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
