@@ -4,16 +4,24 @@
     android:layout_height="match_parent"
     tools:context="com.cgrahams.spellbook.SpellSearchFragment">
 
-    <TextView
-        android:id="@+id/searchFragmentHeaderTextView"
-        style="@style/customHeader"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/SEARCH_HEADER" />
+        android:layout_height="match_parent">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/searchRecyclerView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+        <TextView
+            android:id="@+id/searchFragmentHeaderTextView"
+            style="@style/customHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/SEARCH_HEADER" />
+
+        <ListView
+            android:id="@+id/spellSearchListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchFragmentHeaderTextView"/>
+
+
+    </RelativeLayout>
 
 </FrameLayout>

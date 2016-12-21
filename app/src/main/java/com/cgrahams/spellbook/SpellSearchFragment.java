@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cgrahams.spellbook.model.Spell;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SpellSearchFragment extends Fragment {
-
 
     public SpellSearchFragment() {
         // Required empty public constructor

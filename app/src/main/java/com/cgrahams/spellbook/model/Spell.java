@@ -1,5 +1,7 @@
 package com.cgrahams.spellbook.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by CGrahamS on 12/21/16.
  */
@@ -24,6 +26,11 @@ public class Spell {
         this.range = range;
         this.school = school;
         this.ritual = ritual;
+    }
+
+    public Spell(String name, int level) {
+        this.name = name;
+        this.level = level;
     }
 
     public String getName() {
@@ -96,5 +103,14 @@ public class Spell {
 
     public void setRitual(boolean ritual) {
         this.ritual = ritual;
+    }
+
+    public static ArrayList<Spell> createSpellsList(int numSpells) {
+        ArrayList<Spell> spells = new ArrayList<>();
+
+        for (int i = 0; i < numSpells; i++) {
+            spells.add(new Spell("Spell" + i, i));
+        }
+        return spells;
     }
 }

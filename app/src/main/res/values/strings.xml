@@ -6,4 +6,6 @@
     <string name="HEADER_TEXT">You Have Opened the Spellbook!</string>
     <string name="MAIN_SEARCH_BUTTON">Search Spells</string>
     <string name="SEARCH_HEADER">Choose your spells!</string>
+    <string name="SPELL_NAME">SPELL NAME</string>
+    <string name="SPELL_LEVEL">SPELL LEVEL</string>
 </resources>

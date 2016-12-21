@@ -1,7 +1,7 @@
 package com.cgrahams.spellbook;
 
 import android.os.Build;
-//import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.junit.Before;
@@ -23,13 +23,13 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
     TextView searchHeaderTextView;
-//    RecyclerView searchRecyclerView;
+    ListView spellSearchListView;
 
     @Before
     public void setUp() throws Exception {
         startFragment(fragment);
         searchHeaderTextView = (TextView) fragment.getView().findViewById(R.id.searchFragmentHeaderTextView);
-//        searchRecyclerView = (RecyclerView) fragment.getView().findViewById(R.id.searchRecyclerView);
+        spellSearchListView = (ListView) fragment.getView().findViewById(R.id.spellSearchListView);
     }
 
     @Test
@@ -44,7 +44,8 @@ public class SpellSearchFragmentTest {
     }
 
     @Test
-    public void shouldHaveRecyclerView() throws Exception {
-//        assertViewIsVisible(searchRecyclerView);
+    public void shouldHaveListView() throws Exception {
+        assertViewIsVisible(spellSearchListView);
+        assertNotNull(spellSearchListView);
     }
 }
