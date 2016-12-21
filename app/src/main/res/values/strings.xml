@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="HEADER_TEXT">You Have Opened the Spellbook!</string>
     <string name="MAIN_SEARCH_BUTTON">Search Spells</string>
+    <string name="SEARCH_HEADER">Choose your spells!</string>
 </resources>

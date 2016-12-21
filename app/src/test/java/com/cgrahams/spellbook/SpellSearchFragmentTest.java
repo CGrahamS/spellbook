@@ -11,7 +11,11 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
+import static com.cgrahams.spellbook.support.ResourceLocator.getString;
 import static com.cgrahams.spellbook.support.ViewLocator.getTextView;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
@@ -20,11 +24,12 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 @RunWith(RobolectricGradleTestRunner.class)
 public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
-    private final Activity activity = fragment.getActivity();
+    TextView searchHeaderTextView;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         startFragment(fragment);
+        searchHeaderTextView = (TextView) fragment.getView().findViewById(R.id.searchFragmentHeaderTextView);
     }
 
     @Test
@@ -34,5 +39,7 @@ public class SpellSearchFragmentTest {
 
     @Test
     public void shouldHaveHeader() throws Exception {
+        assertViewIsVisible(searchHeaderTextView);
+        assertThat(searchHeaderTextView.getText().toString(), equalTo(getString(R.string.SEARCH_HEADER)));
     }
 }
