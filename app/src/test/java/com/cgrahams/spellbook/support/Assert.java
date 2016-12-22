@@ -1,5 +1,6 @@
 package com.cgrahams.spellbook.support;
 
+import android.app.Fragment;
 import android.view.View;
 
 import static org.hamcrest.CoreMatchers.equalTo;

@@ -1,10 +1,9 @@
 package com.cgrahams.spellbook;
 
-import android.app.Fragment;
 import android.os.Build;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 
-import com.cgrahams.spellbook.support.ResourceLocator;
+import com.cgrahams.spellbook.ui.SpellSearchActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +11,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
@@ -26,11 +22,12 @@ import static org.junit.Assert.*;
 
 public class SpellSearchActivityTest {
     private SpellSearchActivity activity;
+    private Fragment fragment;
 
     @Before
     public void setUp() throws Exception {
         activity = Robolectric.setupActivity( SpellSearchActivity.class);
-        ButterKnife.bind(this, activity);
+        fragment = activity.getSupportFragmentManager().findFragmentById( R.id.spellSearchFragment );
     }
 
     @Test
@@ -44,8 +41,9 @@ public class SpellSearchActivityTest {
                 equalTo(getString(R.string.app_name)));
     }
 
+    //Find Fragment
     @Test
     public void shouldHaveListFragment() throws Exception {
-        assertNotNull( activity.getSupportFragmentManager().findFragmentById( R.id.spellSearchFragment ));
+        assertViewIsVisible(fragment.getView());
     }
 }
