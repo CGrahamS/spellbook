@@ -5,6 +5,9 @@ import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.ui.MainActivity;
+import com.cgrahams.spellbook.ui.SpellSearchActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

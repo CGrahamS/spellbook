@@ -1,4 +1,4 @@
-package com.cgrahams.spellbook;
+package com.cgrahams.spellbook.ui;
 
 
 import android.os.Bundle;
@@ -9,22 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpellSearchFragment extends Fragment {
     private ListView mListView;
     private View view;
+
+    //Sample Spells
     Spell acidSplash = new Spell("Acid Splash", 1);
     Spell aid = new Spell("Aid", 1);
     Spell alarm = new Spell("Alarm", 1);
     Spell alterSelf = new Spell("Alter Self", 1);
     Spell animalFriendship = new Spell("Animal Friendship", 1);
 
+    //Sample spell list
     Spell[] spells = new Spell[] {acidSplash, aid, alarm, alterSelf, animalFriendship };
-    String[] spellNames = new String[] {acidSplash.getName(), aid.getName(), alarm.getName(), alarm.getName(), animalFriendship.getName()};
+    String[] spellNames = new String[] {acidSplash.getName(), aid.getName(), alarm.getName(), alterSelf.getName(), animalFriendship.getName()};
 
     public SpellSearchFragment() {
         // Required empty public constructor
@@ -34,7 +35,6 @@ public class SpellSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_spell_search, container);
-
         return view;
     }
 
