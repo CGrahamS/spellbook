@@ -21,6 +21,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/searchFragmentHeaderTextView"/>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/spellSearchRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spellSearchListView"/>
+
 
     </RelativeLayout>
 

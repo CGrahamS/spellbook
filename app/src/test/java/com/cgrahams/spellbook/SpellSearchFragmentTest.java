@@ -1,6 +1,8 @@
 package com.cgrahams.spellbook;
 
 import android.os.Build;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,12 +30,14 @@ public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
     TextView searchHeaderTextView;
     ListView spellSearchListView;
+    RecyclerView spellSearchRecyclerView;
 
     @Before
     public void setUp() throws Exception {
         startFragment(fragment);
         searchHeaderTextView = (TextView) fragment.getView().findViewById(R.id.searchFragmentHeaderTextView);
         spellSearchListView = (ListView) fragment.getView().findViewById(R.id.spellSearchListView);
+        spellSearchRecyclerView = (RecyclerView) fragment.getView().findViewById(R.id.spellSearchRecyclerView);
     }
 
     @Test
@@ -56,5 +60,8 @@ public class SpellSearchFragmentTest {
         assertViewIsVisible(spellSearchListView);
     }
 
-
+    @Test
+    public void shouldHaveRecyclerView() throws Exception {
+        assertNotNull(spellSearchRecyclerView);
+    }
 }
