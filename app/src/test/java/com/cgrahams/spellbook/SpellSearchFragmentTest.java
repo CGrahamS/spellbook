@@ -6,14 +6,17 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+//import com.cgrahams.spellbook.support.ShadowRecyclerView;
 import com.cgrahams.spellbook.ui.SpellSearchFragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowListView;
+import org.robolectric.shadows.ShadowView;
 
 import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
@@ -53,15 +56,14 @@ public class SpellSearchFragmentTest {
 
     @Test
     public void shouldHaveListView() throws Exception {
+        assertViewIsVisible(spellSearchListView);
         ShadowListView shadowListView = shadowOf(spellSearchListView);
         shadowListView.populateItems();
-
         assertThat(shadowListView.findIndexOfItemContainingText("Acid Splash"), equalTo(0));
-        assertViewIsVisible(spellSearchListView);
     }
 
     @Test
     public void shouldHaveRecyclerView() throws Exception {
-        assertNotNull(spellSearchRecyclerView);
+        assertViewIsVisible(spellSearchRecyclerView);
     }
 }
