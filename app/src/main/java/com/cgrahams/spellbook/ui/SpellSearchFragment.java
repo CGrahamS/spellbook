@@ -17,18 +17,8 @@ import com.cgrahams.spellbook.adapters.RVAdapter;
 import com.cgrahams.spellbook.model.Spell;
 
 public class SpellSearchFragment extends Fragment {
-    private ListView mListView;
     private View view;
     private RecyclerView mRecyclerView;
-
-    Spell acidSplash = new Spell("Acid Splash", 0);
-    Spell aid = new Spell("Aid", 1);
-    Spell alarm = new Spell("Alarm", 1);
-    Spell alterSelf = new Spell("Alter Self", 1);
-    Spell animalFriendship = new Spell("Animal Friendship", 1);
-
-    String[] spellNames = new String[] {acidSplash.getName(), aid.getName(), alarm.getName(), alterSelf.getName(), animalFriendship.getName()};
-
 
     public SpellSearchFragment() {
         // Required empty public constructor
@@ -44,12 +34,9 @@ public class SpellSearchFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mListView = (ListView) view.findViewById(R.id.spellSearchListView);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(new RVAdapter());
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, spellNames);
-        mListView.setAdapter(adapter);
     }
 
     public static SpellSearchFragment newInstance() {

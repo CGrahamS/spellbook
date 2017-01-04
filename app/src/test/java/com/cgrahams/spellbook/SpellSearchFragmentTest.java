@@ -55,14 +55,6 @@ public class SpellSearchFragmentTest {
     }
 
     @Test
-    public void shouldHaveListView() throws Exception {
-        assertViewIsVisible(spellSearchListView);
-        ShadowListView shadowListView = shadowOf(spellSearchListView);
-        shadowListView.populateItems();
-        assertThat(shadowListView.findIndexOfItemContainingText("Acid Splash"), equalTo(0));
-    }
-
-    @Test
     public void shouldHaveRecyclerView() throws Exception {
         assertViewIsVisible(spellSearchRecyclerView);
     }
