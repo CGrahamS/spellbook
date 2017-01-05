@@ -16,6 +16,8 @@ public class Spell {
     String school;
     boolean ritual;
 
+    public Spell() {}
+
     public Spell(String name, String castingTime, String components, String description, String duration, int level, String range, String school, boolean ritual) {
         this.name = name;
         this.castingTime = castingTime;

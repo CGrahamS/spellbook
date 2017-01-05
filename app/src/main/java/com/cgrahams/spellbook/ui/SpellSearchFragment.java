@@ -14,8 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.cgrahams.spellbook.R;
+import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.RVAdapter;
 import com.cgrahams.spellbook.model.Spell;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +30,8 @@ public class SpellSearchFragment extends Fragment {
 
     private View view;
     private RecyclerView mRecyclerView;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference().child("Spells");
+    private DatabaseReference mSpellRef;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
 
     public SpellSearchFragment() {
         // Required empty public constructor
@@ -39,13 +41,40 @@ public class SpellSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_spell_search, container);
-        myRef.addValueEventListener(new ValueEventListener() {
+        return view;
+    }
 
+    private void setUpFirebaseAdapter() {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Spell, FirebaseSpellViewHolder>
+                (Spell.class, R.layout.spell_list_item, FirebaseSpellViewHolder.class, mSpellRef) {
+            @Override
+            protected void populateViewHolder(FirebaseSpellViewHolder viewHolder, Spell model, int position) {
+                viewHolder.bindSpell(model);
+            }
+        };
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mRecyclerView.setAdapter(mFirebaseAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
+        mSpellRef = FirebaseDatabase.getInstance().getReference().child("Spells");
+        mSpellRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot spellSnapshot  : dataSnapshot.getChildren()) {
+                for (DataSnapshot spellSnapshot :
+                        dataSnapshot.getChildren()) {
                     String spell = spellSnapshot.getValue().toString();
-                    Log.d(TAG, "Value is: " + spell);
+                    Log.d(TAG, "Spell: " + spell);
                 }
             }
 
@@ -54,15 +83,7 @@ public class SpellSearchFragment extends Fragment {
 
             }
         });
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(new RVAdapter());
+        setUpFirebaseAdapter();
     }
 
     public static SpellSearchFragment newInstance() {
