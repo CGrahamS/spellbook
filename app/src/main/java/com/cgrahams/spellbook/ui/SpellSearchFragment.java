@@ -3,6 +3,9 @@ package com.cgrahams.spellbook.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +36,7 @@ public class SpellSearchFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private DatabaseReference mSpellRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public SpellSearchFragment() {
         // Required empty public constructor
@@ -42,6 +46,7 @@ public class SpellSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_spell_search, container);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
         return view;
     }
 
@@ -53,8 +58,9 @@ public class SpellSearchFragment extends Fragment {
                 viewHolder.bindSpell(model);
             }
         };
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mFirebaseAdapter);
     }
 
