@@ -2,9 +2,6 @@ package com.cgrahams.spellbook.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by CGrahamS on 12/21/16.
- */
 public class Spell {
     String name;
     String castingTime;
@@ -30,9 +27,10 @@ public class Spell {
         this.ritual = ritual;
     }
 
-    public Spell(String name, int level) {
+    public Spell(String name, int level, boolean ritual) {
         this.name = name;
         this.level = level;
+        this.ritual = ritual;
     }
 
     public String getName() {
@@ -111,7 +109,7 @@ public class Spell {
         ArrayList<Spell> spells = new ArrayList<>();
 
         for (int i = 0; i < numSpells; i++) {
-            spells.add(new Spell("Spell" + i, i));
+            spells.add(new Spell("Spell" + i, i, true));
         }
         return spells;
     }

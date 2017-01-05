@@ -33,9 +33,23 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder {
     public void bindSpell(Spell spell) {
         TextView spellNameTextView = (TextView) mView.findViewById(R.id.spellNameTextView);
         TextView spellLevelTextView = (TextView) mView.findViewById(R.id.spellLevelTextView);
+        TextView spellRitualTextView = (TextView) mView.findViewById(R.id.spellRitualTextView);
 
         spellNameTextView.setText(spell.getName());
-        spellLevelTextView.setText(Integer.toString(spell.getLevel()));
+
+        //Add spell level if not a cantrip
+        if (spell.getLevel() == 0) {
+            spellLevelTextView.setText("| Cantrip");
+        } else {
+            spellLevelTextView.setText("| Level " + Integer.toString(spell.getLevel()));
+        }
+
+        //Add ritual text if ritual
+        if (spell.isRitual() == true) {
+            spellRitualTextView.setText("| Ritual");
+        } else {
+            spellRitualTextView.setText(null);
+        }
     }
 
 //    @Override
