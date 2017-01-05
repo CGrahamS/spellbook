@@ -23,4 +23,14 @@
         android:layout_toEndOf="@+id/spellNameTextView"
         android:layout_marginLeft="5dp"/>
 
+    <TextView
+        android:id="@+id/spellRitualTextView"
+        android:text="@string/SPELL_Ritual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/spellLevelTextView"
+        android:layout_toEndOf="@+id/spellLevelTextView"
+        android:layout_marginLeft="5dp" />
+
 </RelativeLayout>

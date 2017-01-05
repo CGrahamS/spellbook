@@ -3,22 +3,16 @@ package com.cgrahams.spellbook.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
-import com.cgrahams.spellbook.adapters.RVAdapter;
 import com.cgrahams.spellbook.model.Spell;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseApp;
@@ -26,7 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class SpellSearchFragment extends Fragment {
