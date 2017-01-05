@@ -2,28 +2,22 @@ package com.cgrahams.spellbook;
 
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-//import com.cgrahams.spellbook.support.ShadowRecyclerView;
 import com.cgrahams.spellbook.ui.SpellSearchFragment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowListView;
-import org.robolectric.shadows.ShadowView;
 
 import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
-import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
 

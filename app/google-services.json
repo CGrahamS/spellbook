@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "960918920709",
+    "firebase_url": "https://spellbook-56ec9.firebaseio.com",
+    "project_id": "spellbook-56ec9",
+    "storage_bucket": "spellbook-56ec9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960918920709:android:64963df8d0fb62bf",
+        "android_client_info": {
+          "package_name": "com.cgrahams.spellbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960918920709-t55gab90fd84ia798kmbh1p9gdomglfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cgrahams.spellbook",
+            "certificate_hash": "718B3B3D09A372FDC1D010483A67E9B50D979F65"
+          }
+        },
+        {
+          "client_id": "960918920709-s8umgm57i2ga5s82m7f55j7ov5585m5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0Xy-sACGRS3AzRuCavN4ufW1-hb_kPbo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960918920709-s8umgm57i2ga5s82m7f55j7ov5585m5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
