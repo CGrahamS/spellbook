@@ -38,6 +38,24 @@ Caleb Stevenson: _cgrahamstevenson@gmail.com_
 
 ## Testing
 
+MainActivityTest
+  - [x] Activity shouldNotBeNull
+  - [x] Activity shouldHaveTitle
+  - [x] Activity shouldHaveHeader
+  - [x] Activity shouldHaveSearchButton
+  - [x] Search button shouldStartSpellSearchActivityWhenClicked
+  
+SpellSearchActivity
+  - [x] Activity shouldNotBeNull
+  - [x] Activity shouldHaveTitle
+  - [x] Activity shouldListFragment
+  
+SpellSearchFragment
+  - [x] Activity shouldNotBeNull
+  - [x] Activity shouldHaveHeader
+  - [x] Activity shouldRecyclerView
+  - [ ] RecyclerView shouldHaveListItem
+
 ## Technologies Used
 
 _Java,
