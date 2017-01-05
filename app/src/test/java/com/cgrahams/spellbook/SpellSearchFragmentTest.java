@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cgrahams.spellbook.ui.SpellSearchFragment;
+import com.google.firebase.FirebaseApp;
 
 import org.junit.Before;
 import org.junit.Test;

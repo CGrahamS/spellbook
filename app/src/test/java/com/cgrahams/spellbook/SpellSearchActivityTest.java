@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 
 import com.cgrahams.spellbook.ui.SpellSearchActivity;
+import com.google.firebase.FirebaseApp;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,7 @@ public class SpellSearchActivityTest {
     public void setUp() throws Exception {
         activity = Robolectric.setupActivity( SpellSearchActivity.class);
         fragment = activity.getSupportFragmentManager().findFragmentById( R.id.spellSearchFragment );
+
     }
 
     @Test

@@ -18,6 +18,7 @@ import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.RVAdapter;
 import com.cgrahams.spellbook.model.Spell;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +68,10 @@ public class SpellSearchFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
+
+        //Added in order To pass robolectric tests
+        FirebaseApp.initializeApp(getActivity());
+
         mSpellRef = FirebaseDatabase.getInstance().getReference().child("Spells");
         mSpellRef.addValueEventListener(new ValueEventListener() {
             @Override

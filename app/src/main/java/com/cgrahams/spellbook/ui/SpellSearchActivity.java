@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.cgrahams.spellbook.R;
+import com.google.firebase.FirebaseApp;
 
 public class SpellSearchActivity extends AppCompatActivity {
 
