@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
@@ -24,17 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import butterknife.BindView;
-
 public class SpellSearchFragment extends Fragment {
     public static final String TAG = SpellSearchFragment.class.getSimpleName();
 
-    /** ButterKnife Code **/
-    @BindView(R.id.searchFragmentHeaderTextView)
-    TextView mSearchFragmentHeaderTextView;
-    @BindView(R.id.spellSearchRecyclerView)
-    android.support.v7.widget.RecyclerView mSpellSearchRecyclerView;
-    /** ButterKnife Code **/
+    private TextView mSearchFragmentHeaderTextView;
+    private RecyclerView mSpellSearchRecyclerView;
 
     private View view;
     private DatabaseReference mSpellRef;
@@ -53,6 +46,38 @@ public class SpellSearchFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
+        mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
+        //Added in order To pass robolectric tests
+        FirebaseApp.initializeApp(getActivity());
+
+        mSpellRef = FirebaseDatabase.getInstance().getReference().child("Spells");
+        mSpellRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot spellSnapshot :
+                        dataSnapshot.getChildren()) {
+                    String spell = spellSnapshot.getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        setUpFirebaseAdapter();
+    }
+
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Spell, FirebaseSpellViewHolder>
                 (Spell.class, R.layout.spell_list_item, FirebaseSpellViewHolder.class, mSpellRef) {
@@ -65,38 +90,6 @@ public class SpellSearchFragment extends Fragment {
         mSpellSearchRecyclerView.setHasFixedSize(true);
         mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
         mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        //Added in order To pass robolectric tests
-        FirebaseApp.initializeApp(getActivity());
-
-        mSpellRef = FirebaseDatabase.getInstance().getReference().child("Spells");
-        mSpellRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot spellSnapshot :
-                        dataSnapshot.getChildren()) {
-                    String spell = spellSnapshot.getValue().toString();
-                    Log.d(TAG, "Spell: " + spell);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        setUpFirebaseAdapter();
     }
 
     public static SpellSearchFragment newInstance() {

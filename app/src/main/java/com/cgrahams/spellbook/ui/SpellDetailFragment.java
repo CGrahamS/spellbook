@@ -11,34 +11,21 @@ import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 
-import butterknife.BindView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SpellDetailFragment extends Fragment {
     /** ButterKnife Code **/
-    @BindView(R.id.spellDetailName)
     TextView mSpellDetailName;
-    @BindView(R.id.spellDetailLevel)
     TextView mSpellDetailLevel;
-    @BindView(R.id.spellDetailSchool)
     TextView mSpellDetailSchool;
-    @BindView(R.id.spellDetailRitual)
     TextView mSpellDetailRitual;
-    @BindView(R.id.spellDetailCastingTime)
     TextView mSpellDetailCastingTime;
-    @BindView(R.id.spellDetailRange)
     TextView mSpellDetailRange;
-    @BindView(R.id.spellDetailComponents)
     TextView mSpellDetailComponents;
-    @BindView(R.id.spellDetailDuration)
     TextView mSpellDetailDuration;
-    @BindView(R.id.spellDetailDescription)
     TextView mSpellDetailDescription;
-    @BindView(R.id.addToSpellbookButton)
     Button mAddToSpellbookButton;
-    /** ButterKnife Code **/
 
 
     public SpellDetailFragment() {

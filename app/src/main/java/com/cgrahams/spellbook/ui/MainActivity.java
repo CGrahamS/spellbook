@@ -9,22 +9,17 @@ import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    @BindView(R.id.mainHeaderTextView)
     TextView mMainHeaderTextView;
-    @BindView(R.id.mainSearchButton)
     Button mMainSearchButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        mMainSearchButton = (Button) findViewById(R.id.mainSearchButton);
 
         mMainSearchButton.setOnClickListener(this);
     }
