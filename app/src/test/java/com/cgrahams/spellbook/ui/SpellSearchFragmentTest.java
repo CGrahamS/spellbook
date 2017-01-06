@@ -29,14 +29,12 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
     TextView searchHeaderTextView;
-    ListView spellSearchListView;
     RecyclerView spellSearchRecyclerView;
 
     @Before
     public void setUp() throws Exception {
         startFragment(fragment);
         searchHeaderTextView = (TextView) fragment.getView().findViewById(R.id.searchFragmentHeaderTextView);
-        spellSearchListView = (ListView) fragment.getView().findViewById(R.id.spellSearchListView);
         spellSearchRecyclerView = (RecyclerView) fragment.getView().findViewById(R.id.spellSearchRecyclerView);
     }
 

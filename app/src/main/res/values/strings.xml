@@ -9,4 +9,14 @@
     <string name="SPELL_NAME">SPELL NAME</string>
     <string name="SPELL_LEVEL">SPELL LEVEL</string>
     <string name="SPELL_Ritual">SPELL RITUAL</string>
+    <string name="SPELL_DETAIL_NAME">SPELL NAME</string>
+    <string name="SPELL_DETAIL_CASTING_TIME">CASTING TIME</string>
+    <string name="SPELL_DETAIL_RANGE">RANGE</string>
+    <string name="SPELL_DETAIL_LEVEL">LEVEL</string>
+    <string name="SPELL_DETAIL_SCHOOL">SCHOOL</string>
+    <string name="SPELL_DETAIL_RITUAL">RITUAL</string>
+    <string name="SPELL_DETAIL_COMPONENTS">COMPONENTS</string>
+    <string name="SPELL_DETAIL_DURATION">DURATION</string>
+    <string name="SPELL_DETAIL_DESCRIPTION">DESCRIPTION</string>
+    <string name="ADD_TO_SPELLBOOK">ADD TO SPELLBOOK</string>
 </resources>

@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
@@ -22,11 +24,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import butterknife.BindView;
+
 public class SpellSearchFragment extends Fragment {
     public static final String TAG = SpellSearchFragment.class.getSimpleName();
 
+    /** ButterKnife Code **/
+    @BindView(R.id.searchFragmentHeaderTextView)
+    TextView mSearchFragmentHeaderTextView;
+    @BindView(R.id.spellSearchRecyclerView)
+    android.support.v7.widget.RecyclerView mSpellSearchRecyclerView;
+    /** ButterKnife Code **/
+
     private View view;
-    private RecyclerView mRecyclerView;
     private DatabaseReference mSpellRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -51,10 +61,10 @@ public class SpellSearchFragment extends Fragment {
                 viewHolder.bindSpell(model);
             }
         };
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mFirebaseAdapter);
+        mSpellSearchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        mSpellSearchRecyclerView.setHasFixedSize(true);
+        mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
+        mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
     }
 
     @Override
@@ -66,7 +76,6 @@ public class SpellSearchFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
 
         //Added in order To pass robolectric tests
         FirebaseApp.initializeApp(getActivity());
