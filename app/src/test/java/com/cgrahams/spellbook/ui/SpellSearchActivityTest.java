@@ -1,8 +1,10 @@
-package com.cgrahams.spellbook;
+package com.cgrahams.spellbook.ui;
 
 import android.os.Build;
 import android.support.v4.app.Fragment;
 
+import com.cgrahams.spellbook.BuildConfig;
+import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.ui.SpellSearchActivity;
 import com.google.firebase.FirebaseApp;
 

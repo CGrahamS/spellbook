@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SpellSearchActivity"></activity>
+        <activity android:name=".ui.SpellSearchActivity" />
+        <activity android:name=".ui.SpellDetailActivity"></activity>
     </application>
 
 </manifest>

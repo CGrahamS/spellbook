@@ -1,10 +1,12 @@
-package com.cgrahams.spellbook;
+package com.cgrahams.spellbook.ui;
 
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.BuildConfig;
+import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.ui.SpellSearchFragment;
 import com.google.firebase.FirebaseApp;
 
