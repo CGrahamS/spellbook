@@ -19,4 +19,5 @@
     <string name="SPELL_DETAIL_DURATION">DURATION</string>
     <string name="SPELL_DETAIL_DESCRIPTION">DESCRIPTION</string>
     <string name="ADD_TO_SPELLBOOK">ADD TO SPELLBOOK</string>
+    <string name="CHANGE_TEXT">Change Text!</string>
 </resources>

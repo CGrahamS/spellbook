@@ -2,13 +2,11 @@ package com.cgrahams.spellbook.ui;
 
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cgrahams.spellbook.BuildConfig;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.ui.SpellSearchFragment;
-import com.google.firebase.FirebaseApp;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,13 +21,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
-
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 public class SpellSearchFragmentTest {
     private final SpellSearchFragment fragment = new SpellSearchFragment();
-    TextView searchHeaderTextView;
-    RecyclerView spellSearchRecyclerView;
+    private TextView searchHeaderTextView;
+    private RecyclerView spellSearchRecyclerView;
 
     @Before
     public void setUp() throws Exception {
