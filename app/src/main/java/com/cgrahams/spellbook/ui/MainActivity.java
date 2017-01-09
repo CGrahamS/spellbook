@@ -8,26 +8,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
-import com.cgrahams.spellbook.model.Spell;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    @Bind(R.id.mainHeaderTextView)
     TextView mMainHeaderTextView;
-    @Bind(R.id.mainSearchButton)
     Button mMainSearchButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        mMainSearchButton = (Button) findViewById(R.id.mainSearchButton);
 
         mMainSearchButton.setOnClickListener(this);
     }

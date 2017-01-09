@@ -1,8 +1,10 @@
-package com.cgrahams.spellbook;
+package com.cgrahams.spellbook.ui;
 
 import android.os.Build;
 import android.support.v4.app.Fragment;
 
+import com.cgrahams.spellbook.BuildConfig;
+import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.ui.SpellSearchActivity;
 import com.google.firebase.FirebaseApp;
 
@@ -17,6 +19,7 @@ import static com.cgrahams.spellbook.support.Assert.assertViewIsVisible;
 import static com.cgrahams.spellbook.support.ResourceLocator.getString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
+import static org.robolectric.Robolectric.setupActivity;
 
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
@@ -27,7 +30,7 @@ public class SpellSearchActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        activity = Robolectric.setupActivity( SpellSearchActivity.class);
+        activity = setupActivity( SpellSearchActivity.class);
         fragment = activity.getSupportFragmentManager().findFragmentById( R.id.spellSearchFragment );
 
     }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by CGrahamS on 1/3/17.
  */
 
-public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder {
+public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private View mView;
     private Context mContext;
@@ -52,24 +52,24 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-//    @Override
-//    public void onClick(View view) {
-//        final ArrayList<Spell> spells = new ArrayList<>();
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Spells");
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot spellSnapshot :
-//                        dataSnapshot.getChildren()) {
-//                    spells.add(spellSnapshot.getValue(Spell.class));
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    @Override
+    public void onClick(View view) {
+        final ArrayList<Spell> spells = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Spells");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot spellSnapshot :
+                        dataSnapshot.getChildren()) {
+                    spells.add(spellSnapshot.getValue(Spell.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

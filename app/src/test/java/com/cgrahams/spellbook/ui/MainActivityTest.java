@@ -1,12 +1,12 @@
-package com.cgrahams.spellbook;
+package com.cgrahams.spellbook.ui;
 
 import android.content.Intent;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cgrahams.spellbook.ui.MainActivity;
-import com.cgrahams.spellbook.ui.SpellSearchActivity;
+import com.cgrahams.spellbook.BuildConfig;
+import com.cgrahams.spellbook.R;
 
 import org.junit.Before;
 import org.junit.Test;
