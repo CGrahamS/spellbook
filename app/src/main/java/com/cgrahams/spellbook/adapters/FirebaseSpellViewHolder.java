@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by CGrahamS on 1/3/17.
  */
 
-public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder {
     public static final String TAG = FirebaseSpellViewHolder.class.getSimpleName();
 
     private View mView;
@@ -34,13 +34,13 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements 
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     public void bindSpell(Spell spell) {
         TextView spellNameTextView = (TextView) mView.findViewById(R.id.spellNameTextView);
         TextView spellLevelTextView = (TextView) mView.findViewById(R.id.spellLevelTextView);
         TextView spellRitualTextView = (TextView) mView.findViewById(R.id.spellRitualTextView);
+
 
         spellNameTextView.setText(spell.getName());
 
@@ -59,30 +59,5 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements 
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        final ArrayList<Spell> spells = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Spells");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot spellSnapshot :
-                        dataSnapshot.getChildren()) {
-                    spells.add(spellSnapshot.getValue(Spell.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-                Intent intent = new Intent(mContext, SpellDetailActivity.class);
-                intent.putExtra("position", itemPosition);
-                intent.putExtra("spells", Parcels.wrap(spells));
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
 }

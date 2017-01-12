@@ -22,15 +22,15 @@ import java.util.ArrayList;
  */
 public class SpellDetailFragment extends Fragment {
     /** ButterKnife Code **/
-    TextView mSpellDetailName;
-    TextView mSpellDetailLevel;
-    TextView mSpellDetailSchool;
-    TextView mSpellDetailRitual;
-    TextView mSpellDetailCastingTime;
-    TextView mSpellDetailRange;
-    TextView mSpellDetailComponents;
-    TextView mSpellDetailDuration;
-    TextView mSpellDetailDescription;
+    TextView mSpellName;
+    TextView mSpellLevel;
+    TextView mSpellSchool;
+    TextView mSpellRitual;
+    TextView mSpellCastingTime;
+    TextView mSpellRange;
+    TextView mSpellComponents;
+    TextView mSpellDuration;
+    TextView mSpellDescription;
     Button mAddToSpellbookButton;
 
     private Spell mSpell;
@@ -44,8 +44,10 @@ public class SpellDetailFragment extends Fragment {
     public static SpellDetailFragment newInstance(ArrayList<Spell> spells, Integer position) {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
+
         args.putParcelable("spells", Parcels.wrap(spells));
         args.putInt("position", position);
+
         spellDetailFragment.setArguments(args);
         return spellDetailFragment;
     }
@@ -62,8 +64,25 @@ public class SpellDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_spell_detail, container, false);
-        mSpellDetailName = (TextView) getActivity().findViewById(R.id.spellDetailName);
-        mSpellDetailName.setText(mSpell.getName());
+        mSpellName = (TextView) view.findViewById(R.id.spellDetailName);
+        mSpellLevel = (TextView) view.findViewById(R.id.spellDetailLevel);
+        mSpellSchool = (TextView) view.findViewById(R.id.spellDetailSchool);
+        mSpellRitual = (TextView) view.findViewById(R.id.spellDetailRitual);
+        mSpellCastingTime = (TextView) view.findViewById(R.id.spellDetailCastingTime);
+        mSpellRange = (TextView) view.findViewById(R.id.spellDetailRange);
+        mSpellComponents = (TextView) view.findViewById(R.id.spellDetailComponents);
+        mSpellDuration = (TextView) view.findViewById(R.id.spellDetailDuration);
+        mSpellDescription = (TextView) view.findViewById(R.id.spellDetailDescription);
+
+        mSpellName.setText(mSpell.getName());
+        mSpellLevel.setText(Integer.toString(mSpell.getLevel()));
+        mSpellSchool.setText(mSpell.getSchool());
+        mSpellRitual.setText(Boolean.toString(mSpell.isRitual()));
+        mSpellCastingTime.setText(mSpell.getCastingTime());
+        mSpellRange.setText(mSpell.getRange());
+        mSpellComponents.setText(mSpell.getComponents());
+        mSpellDuration.setText(mSpell.getDuration());
+        mSpellDescription.setText(mSpell.getDescription());
         return view;
     }
 

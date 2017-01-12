@@ -3,6 +3,7 @@ package com.cgrahams.spellbook.ui;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.SpellPagerAdapter;
@@ -13,7 +14,9 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 
 public class SpellDetailActivity extends AppCompatActivity {
-    ViewPager mViewPager ;
+    public static final String TAG = SpellDetailActivity.class.getSimpleName();
+
+    ViewPager mViewPager;
     private SpellPagerAdapter adapterViewPager;
     ArrayList<Spell> mSpells = new ArrayList<>();
 
@@ -24,6 +27,7 @@ public class SpellDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spell_detail);
         mViewPager = (ViewPager) findViewById(R.id.spellDetailViewPager);
         mSpells = Parcels.unwrap(getIntent().getParcelableExtra("spells"));
+        Log.d(TAG, "onCreate: " + mSpells);
         int startingPosition = getIntent().getIntExtra("position", 0);
 
         adapterViewPager = new SpellPagerAdapter(getSupportFragmentManager(), mSpells);

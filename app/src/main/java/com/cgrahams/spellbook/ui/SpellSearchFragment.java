@@ -14,14 +14,13 @@ import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
+import com.cgrahams.spellbook.adapters.SpellListAdapter;
 import com.cgrahams.spellbook.model.Spell;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
 public class SpellSearchFragment extends Fragment {
     public static final String TAG = SpellSearchFragment.class.getSimpleName();
@@ -30,7 +29,6 @@ public class SpellSearchFragment extends Fragment {
     private RecyclerView mSpellSearchRecyclerView;
 
     private View view;
-    private DatabaseReference mSpellRef;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -43,47 +41,35 @@ public class SpellSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_spell_search, container);
         mLayoutManager = new LinearLayoutManager(view.getContext());
+        FirebaseApp.initializeApp(getActivity());
+        mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
+        mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
+        setUpFirebaseAdapter();
         return view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
-        mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
-        //Added in order To pass robolectric tests
-        FirebaseApp.initializeApp(getActivity());
-
-        mSpellRef = FirebaseDatabase.getInstance().getReference().child("Spells");
-        mSpellRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot spellSnapshot :
-                        dataSnapshot.getChildren()) {
-                    String spell = spellSnapshot.getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        setUpFirebaseAdapter();
-    }
-
     private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Spell, FirebaseSpellViewHolder>
-                (Spell.class, R.layout.spell_list_item, FirebaseSpellViewHolder.class, mSpellRef) {
-            @Override
-            protected void populateViewHolder(FirebaseSpellViewHolder viewHolder, Spell model, int position) {
-                viewHolder.bindSpell(model);
-            }
-        };
+
+        Query query = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("Spells");
+
+        mFirebaseAdapter = new SpellListAdapter(Spell.class, R.layout.spell_list_item,
+                FirebaseSpellViewHolder.class, query, getActivity());
         mSpellSearchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mSpellSearchRecyclerView.setHasFixedSize(true);
-        mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
+        mSpellSearchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
+
+        mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount) {
+                super.onItemRangeChanged(positionStart, itemCount);
+                mFirebaseAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
