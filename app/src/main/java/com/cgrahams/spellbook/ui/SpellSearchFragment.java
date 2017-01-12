@@ -47,12 +47,6 @@ public class SpellSearchFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
@@ -90,6 +84,12 @@ public class SpellSearchFragment extends Fragment {
         mSpellSearchRecyclerView.setHasFixedSize(true);
         mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
         mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
     }
 
     public static SpellSearchFragment newInstance() {

@@ -1,17 +1,22 @@
 package com.cgrahams.spellbook.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
+import com.cgrahams.spellbook.ui.SpellDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -20,6 +25,7 @@ import java.util.ArrayList;
  */
 
 public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static final String TAG = FirebaseSpellViewHolder.class.getSimpleName();
 
     private View mView;
     private Context mContext;
@@ -28,6 +34,7 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements 
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
+        itemView.setOnClickListener(this);
     }
 
     public void bindSpell(Spell spell) {
@@ -63,6 +70,12 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder implements 
                         dataSnapshot.getChildren()) {
                     spells.add(spellSnapshot.getValue(Spell.class));
                 }
+
+                int itemPosition = getLayoutPosition();
+                Intent intent = new Intent(mContext, SpellDetailActivity.class);
+                intent.putExtra("position", itemPosition);
+                intent.putExtra("spells", Parcels.wrap(spells));
+                mContext.startActivity(intent);
             }
 
             @Override

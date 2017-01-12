@@ -13,6 +13,9 @@ import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
 
 import org.parceler.Parcels;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,15 +34,18 @@ public class SpellDetailFragment extends Fragment {
     Button mAddToSpellbookButton;
 
     private Spell mSpell;
+    private ArrayList<Spell> mSpells;
+    private int mPosition;
 
     public SpellDetailFragment() {
         // Required empty public constructor
     }
 
-    public static SpellDetailFragment newInstance(Spell spell) {
+    public static SpellDetailFragment newInstance(ArrayList<Spell> spells, Integer position) {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("spell", Parcels.wrap(spell));
+        args.putParcelable("spells", Parcels.wrap(spells));
+        args.putInt("position", position);
         spellDetailFragment.setArguments(args);
         return spellDetailFragment;
     }
@@ -47,14 +53,27 @@ public class SpellDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSpell = Parcels.unwrap(getArguments().getParcelable("spell"));
+        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
+        mPosition = getArguments().getInt("position");
+        mSpell = mSpells.get(mPosition);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spell_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_spell_detail, container, false);
+        mSpellDetailName = (TextView) getActivity().findViewById(R.id.spellDetailName);
+        mSpellDetailName.setText(mSpell.getName());
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public static SpellDetailFragment newInstance() {
+        return new SpellDetailFragment();
     }
 
 }
