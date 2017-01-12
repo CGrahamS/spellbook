@@ -75,15 +75,41 @@ public class SpellDetailFragment extends Fragment {
         mSpellDescription = (TextView) view.findViewById(R.id.spellDetailDescription);
 
         mSpellName.setText(mSpell.getName());
-        mSpellLevel.setText(Integer.toString(mSpell.getLevel()));
+        mSpellLevel.setText(buildSpellLevel(mSpell.getLevel()));
         mSpellSchool.setText(mSpell.getSchool());
-        mSpellRitual.setText(Boolean.toString(mSpell.isRitual()));
+        mSpellRitual.setText(determineIfRitual(mSpell.isRitual()));
         mSpellCastingTime.setText(mSpell.getCastingTime());
         mSpellRange.setText(mSpell.getRange());
         mSpellComponents.setText(mSpell.getComponents());
         mSpellDuration.setText(mSpell.getDuration());
         mSpellDescription.setText(mSpell.getDescription());
         return view;
+    }
+
+    public String buildSpellLevel(int level) {
+        String spellLevelText;
+        if (level == 0) {
+           spellLevelText = "Cantrip";
+        } else if (level == 1) {
+            spellLevelText = "1st-level";
+        } else if (level == 2) {
+            spellLevelText = "2nd-level";
+        } else if (level == 3) {
+            spellLevelText = "3rd-level";
+        } else {
+            spellLevelText = level + "th-level";
+        }
+        return spellLevelText;
+    }
+
+    public String determineIfRitual(Boolean isRitual) {
+        String spellRitual;
+        if (isRitual) {
+            spellRitual = "Ritual";
+        } else {
+            spellRitual = "";
+        }
+        return spellRitual;
     }
 
     @Override
@@ -94,5 +120,4 @@ public class SpellDetailFragment extends Fragment {
     public static SpellDetailFragment newInstance() {
         return new SpellDetailFragment();
     }
-
 }
