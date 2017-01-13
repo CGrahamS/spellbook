@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @Parcel
 public class Spell {
     String name;
-    String castingTime;
+    String casting_time;
     String components;
     String description;
     String duration;
@@ -19,9 +19,9 @@ public class Spell {
 
     public Spell() {}
 
-    public Spell(String name, String castingTime, String components, String description, String duration, int level, String range, String school, boolean ritual) {
+    public Spell(String name, String casting_time, String components, String description, String duration, int level, String range, String school, boolean ritual) {
         this.name = name;
-        this.castingTime = castingTime;
+        this.casting_time = casting_time;
         this.components = components;
         this.description = description;
         this.duration = duration;
@@ -46,11 +46,11 @@ public class Spell {
     }
 
     public String getCastingTime() {
-        return castingTime;
+        return casting_time;
     }
 
     public void setCastingTime(String castingTime) {
-        this.castingTime = castingTime;
+        this.casting_time = castingTime;
     }
 
     public String getComponents() {

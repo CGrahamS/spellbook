@@ -3,6 +3,8 @@ package com.cgrahams.spellbook.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,8 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class SpellDetailFragment extends Fragment {
-    /** ButterKnife Code **/
+    public static final String TAG = SpellDetailFragment.class.getSimpleName();
+
     TextView mSpellName;
     TextView mSpellLevel;
     TextView mSpellSchool;
@@ -74,14 +77,21 @@ public class SpellDetailFragment extends Fragment {
         mSpellDuration = (TextView) view.findViewById(R.id.spellDetailDuration);
         mSpellDescription = (TextView) view.findViewById(R.id.spellDetailDescription);
 
+        String mCastingTime = getResources().getString(R.string.SPELL_DETAIL_CASTING_TIME);
+        String mRange = getResources().getString(R.string.SPELL_DETAIL_RANGE);
+        String mComponents = getResources().getString(R.string.SPELL_DETAIL_COMPONENTS);
+        String mDuration = getResources().getString(R.string.SPELL_DETAIL_DURATION);
+
         mSpellName.setText(mSpell.getName());
         mSpellLevel.setText(buildSpellLevel(mSpell.getLevel()));
         mSpellSchool.setText(mSpell.getSchool());
         mSpellRitual.setText(determineIfRitual(mSpell.isRitual()));
-        mSpellCastingTime.setText(mSpell.getCastingTime());
-        mSpellRange.setText(mSpell.getRange());
-        mSpellComponents.setText(mSpell.getComponents());
-        mSpellDuration.setText(mSpell.getDuration());
+
+        //using Html.fromHtml to render <b> tags defined in the string resource
+        mSpellCastingTime.setText(Html.fromHtml(formatString(mCastingTime, mSpell.getCastingTime())));
+        mSpellRange.setText(Html.fromHtml(formatString(mRange, mSpell.getRange())));
+        mSpellComponents.setText(Html.fromHtml(formatString(mComponents, mSpell.getComponents())));
+        mSpellDuration.setText(Html.fromHtml(formatString(mDuration, mSpell.getDuration())));
         mSpellDescription.setText(mSpell.getDescription());
         return view;
     }
@@ -110,6 +120,11 @@ public class SpellDetailFragment extends Fragment {
             spellRitual = "";
         }
         return spellRitual;
+    }
+
+    public String formatString(String resource, String variable) {
+        String outputString = String.format(resource, variable);
+        return outputString;
     }
 
     @Override
