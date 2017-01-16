@@ -49,7 +49,6 @@ public class SpellSearchFragment extends Fragment {
 
     private void setUpFirebaseAdapter() {
 
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Util mDatabaseInstance = Util.getInstance();
         FirebaseDatabase mDatabase;
 

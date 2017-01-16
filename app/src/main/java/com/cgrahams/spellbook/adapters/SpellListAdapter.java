@@ -2,6 +2,7 @@ package com.cgrahams.spellbook.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.cgrahams.spellbook.Util;
@@ -35,13 +36,16 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
         super(modelClass, modelLayout, viewHolderClass, ref);
         mRef = ref.getRef();
         mContext = context;
+        final Util spellList = Util.getInstance();
 
         mChildEventListener = mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 mSpells.add(dataSnapshot.getValue(Spell.class));
+                spellList.setSpells(mSpells);
             }
 
+            //TODO add handler for updating spells
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
@@ -62,9 +66,6 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
 
             }
         });
-
-        Util spellList = Util.getInstance();
-        spellList.setSpells(mSpells);
     }
 
 

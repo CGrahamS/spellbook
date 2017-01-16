@@ -45,7 +45,6 @@ public class SpellDetailFragment extends Fragment {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
 
-//        args.putParcelable("spells", Parcels.wrap(spells));
         args.putInt("position", position);
 
         spellDetailFragment.setArguments(args);
@@ -55,7 +54,6 @@ public class SpellDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
         Util spellList = Util.getInstance();
         mSpells = spellList.getSpells();
         mPosition = getArguments().getInt("position");
