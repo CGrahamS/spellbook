@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.Constants;
 import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
@@ -44,9 +45,7 @@ public class SpellDetailFragment extends Fragment {
     public static SpellDetailFragment newInstance(ArrayList<Spell> spells, Integer position) {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
-
-        args.putInt("position", position);
-
+        args.putInt(Constants.POSITION_KEY, position);
         spellDetailFragment.setArguments(args);
         return spellDetailFragment;
     }
@@ -56,7 +55,7 @@ public class SpellDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Util spellList = Util.getInstance();
         mSpells = spellList.getSpells();
-        mPosition = getArguments().getInt("position");
+        mPosition = getArguments().getInt(Constants.POSITION_KEY);
         mSpell = mSpells.get(mPosition);
     }
 

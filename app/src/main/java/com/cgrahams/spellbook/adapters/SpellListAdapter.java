@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
+import com.cgrahams.spellbook.Constants;
 import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.model.Spell;
 import com.cgrahams.spellbook.ui.SpellDetailActivity;
@@ -77,7 +78,7 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SpellDetailActivity.class);
-                intent.putExtra("position", viewHolder.getAdapterPosition());
+                intent.putExtra(Constants.POSITION_KEY, viewHolder.getAdapterPosition());
                 mContext.startActivity(intent);
             }
         });
@@ -88,5 +89,4 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
         super.cleanup();
         mRef.removeEventListener(mChildEventListener);
     }
-
 }
