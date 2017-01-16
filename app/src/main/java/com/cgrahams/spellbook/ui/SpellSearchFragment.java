@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.SpellListAdapter;
@@ -21,6 +22,12 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.google.firebase.database.DatabaseReference.goOffline;
 
 public class SpellSearchFragment extends Fragment {
     public static final String TAG = SpellSearchFragment.class.getSimpleName();
@@ -50,6 +57,7 @@ public class SpellSearchFragment extends Fragment {
 
     private void setUpFirebaseAdapter() {
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Query query = FirebaseDatabase
                 .getInstance()
                 .getReference()

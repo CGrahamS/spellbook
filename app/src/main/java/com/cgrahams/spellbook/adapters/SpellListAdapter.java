@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
 import com.cgrahams.spellbook.ui.SpellDetailActivity;
@@ -67,6 +68,9 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
 
             }
         });
+
+        GlobalSpellList spellList = GlobalSpellList.getInstance();
+        spellList.setSpells(mSpells);
     }
 
 
@@ -77,9 +81,8 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: " + mSpells);
                 Intent intent = new Intent(mContext, SpellDetailActivity.class);
-                intent.putExtra("spells", Parcels.wrap(mSpells));
+//                intent.putExtra("spells", Parcels.wrap(mSpells));
                 intent.putExtra("position", viewHolder.getAdapterPosition());
                 mContext.startActivity(intent);
             }

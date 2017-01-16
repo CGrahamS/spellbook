@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
 
@@ -48,7 +49,7 @@ public class SpellDetailFragment extends Fragment {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable("spells", Parcels.wrap(spells));
+//        args.putParcelable("spells", Parcels.wrap(spells));
         args.putInt("position", position);
 
         spellDetailFragment.setArguments(args);
@@ -58,7 +59,9 @@ public class SpellDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
+//        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
+        GlobalSpellList spellList = GlobalSpellList.getInstance();
+        mSpells = spellList.getSpells();
         mPosition = getArguments().getInt("position");
         mSpell = mSpells.get(mPosition);
     }
