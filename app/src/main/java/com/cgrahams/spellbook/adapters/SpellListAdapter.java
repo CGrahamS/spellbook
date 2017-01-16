@@ -1,16 +1,12 @@
 package com.cgrahams.spellbook.adapters;
 
-import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 
-import com.cgrahams.spellbook.R;
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.model.Spell;
 import com.cgrahams.spellbook.ui.SpellDetailActivity;
-import com.cgrahams.spellbook.ui.SpellDetailFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -18,7 +14,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -67,6 +62,9 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
 
             }
         });
+
+        Util spellList = Util.getInstance();
+        spellList.setSpells(mSpells);
     }
 
 
@@ -77,9 +75,7 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: " + mSpells);
                 Intent intent = new Intent(mContext, SpellDetailActivity.class);
-                intent.putExtra("spells", Parcels.wrap(mSpells));
                 intent.putExtra("position", viewHolder.getAdapterPosition());
                 mContext.startActivity(intent);
             }

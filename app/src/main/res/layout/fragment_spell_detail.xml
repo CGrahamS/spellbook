@@ -32,6 +32,7 @@
                 <TextView
                     android:id="@+id/spellDetailLevel"
                     android:text="@string/SPELL_DETAIL_LEVEL"
+                    android:textStyle="italic"
                     android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -39,6 +40,7 @@
                 <TextView
                     android:id="@+id/spellDetailSchool"
                     android:text="@string/SPELL_DETAIL_SCHOOL"
+                    android:textStyle="italic"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
@@ -47,6 +49,7 @@
                 <TextView
                     android:id="@+id/spellDetailRitual"
                     android:text="@string/SPELL_DETAIL_RITUAL"
+                    android:textStyle="italic"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
@@ -77,12 +80,19 @@
                 android:text="@string/SPELL_DETAIL_DURATION"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/spellDetailDescription"
-                android:text="@string/SPELL_DETAIL_DESCRIPTION"
+            
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/spellDetailDescription"
+                    android:text="@string/SPELL_DETAIL_DESCRIPTION"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </ScrollView>
 
         </LinearLayout>
 
@@ -90,6 +100,7 @@
             android:id="@+id/addToSpellbookButton"
             android:text="@string/ADD_TO_SPELLBOOK"
             android:background="@color/colorPrimary"
+            android:layout_marginTop="5dp"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

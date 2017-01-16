@@ -1,7 +1,6 @@
 package com.cgrahams.spellbook.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -9,16 +8,6 @@ import android.widget.TextView;
 
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
-import com.cgrahams.spellbook.ui.SpellDetailActivity;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
 
 /**
  * Created by CGrahamS on 1/3/17.

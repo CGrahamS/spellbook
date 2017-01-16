@@ -6,19 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.SpellListAdapter;
 import com.cgrahams.spellbook.model.Spell;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -50,8 +49,13 @@ public class SpellSearchFragment extends Fragment {
 
     private void setUpFirebaseAdapter() {
 
-        Query query = FirebaseDatabase
-                .getInstance()
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        Util mDatabaseInstance = Util.getInstance();
+        FirebaseDatabase mDatabase;
+
+        mDatabase = mDatabaseInstance.getDatabase();
+
+        Query query = mDatabase
                 .getReference()
                 .child("Spells");
 

@@ -3,17 +3,16 @@ package com.cgrahams.spellbook.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
-
-import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,8 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class SpellDetailFragment extends Fragment {
-    /** ButterKnife Code **/
+    public static final String TAG = SpellDetailFragment.class.getSimpleName();
+
     TextView mSpellName;
     TextView mSpellLevel;
     TextView mSpellSchool;
@@ -45,7 +45,7 @@ public class SpellDetailFragment extends Fragment {
         SpellDetailFragment spellDetailFragment = new SpellDetailFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable("spells", Parcels.wrap(spells));
+//        args.putParcelable("spells", Parcels.wrap(spells));
         args.putInt("position", position);
 
         spellDetailFragment.setArguments(args);
@@ -55,7 +55,9 @@ public class SpellDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
+//        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
+        Util spellList = Util.getInstance();
+        mSpells = spellList.getSpells();
         mPosition = getArguments().getInt("position");
         mSpell = mSpells.get(mPosition);
     }
@@ -74,16 +76,54 @@ public class SpellDetailFragment extends Fragment {
         mSpellDuration = (TextView) view.findViewById(R.id.spellDetailDuration);
         mSpellDescription = (TextView) view.findViewById(R.id.spellDetailDescription);
 
+        String mCastingTime = getResources().getString(R.string.SPELL_DETAIL_CASTING_TIME);
+        String mRange = getResources().getString(R.string.SPELL_DETAIL_RANGE);
+        String mComponents = getResources().getString(R.string.SPELL_DETAIL_COMPONENTS);
+        String mDuration = getResources().getString(R.string.SPELL_DETAIL_DURATION);
+
         mSpellName.setText(mSpell.getName());
-        mSpellLevel.setText(Integer.toString(mSpell.getLevel()));
+        mSpellLevel.setText(buildSpellLevel(mSpell.getLevel()));
         mSpellSchool.setText(mSpell.getSchool());
-        mSpellRitual.setText(Boolean.toString(mSpell.isRitual()));
-        mSpellCastingTime.setText(mSpell.getCastingTime());
-        mSpellRange.setText(mSpell.getRange());
-        mSpellComponents.setText(mSpell.getComponents());
-        mSpellDuration.setText(mSpell.getDuration());
+        mSpellRitual.setText(determineIfRitual(mSpell.isRitual()));
+
+        //using Html.fromHtml to render <b> tags defined in the string resource
+        mSpellCastingTime.setText(Html.fromHtml(formatString(mCastingTime, mSpell.getCastingTime())));
+        mSpellRange.setText(Html.fromHtml(formatString(mRange, mSpell.getRange())));
+        mSpellComponents.setText(Html.fromHtml(formatString(mComponents, mSpell.getComponents())));
+        mSpellDuration.setText(Html.fromHtml(formatString(mDuration, mSpell.getDuration())));
         mSpellDescription.setText(mSpell.getDescription());
         return view;
+    }
+
+    public String buildSpellLevel(int level) {
+        String spellLevelText;
+        if (level == 0) {
+           spellLevelText = "Cantrip";
+        } else if (level == 1) {
+            spellLevelText = "1st-level";
+        } else if (level == 2) {
+            spellLevelText = "2nd-level";
+        } else if (level == 3) {
+            spellLevelText = "3rd-level";
+        } else {
+            spellLevelText = level + "th-level";
+        }
+        return spellLevelText;
+    }
+
+    public String determineIfRitual(Boolean isRitual) {
+        String spellRitual;
+        if (isRitual) {
+            spellRitual = "Ritual";
+        } else {
+            spellRitual = "";
+        }
+        return spellRitual;
+    }
+
+    public String formatString(String resource, String variable) {
+        String outputString = String.format(resource, variable);
+        return outputString;
     }
 
     @Override
@@ -94,5 +134,4 @@ public class SpellDetailFragment extends Fragment {
     public static SpellDetailFragment newInstance() {
         return new SpellDetailFragment();
     }
-
 }
