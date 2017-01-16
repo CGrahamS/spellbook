@@ -15,9 +15,6 @@ import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
 
-import org.parceler.Parcels;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /**

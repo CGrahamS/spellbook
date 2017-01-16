@@ -1,24 +1,13 @@
 package com.cgrahams.spellbook.ui;
 
-import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.SpellPagerAdapter;
 import com.cgrahams.spellbook.model.Spell;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -38,7 +27,6 @@ public class SpellDetailActivity extends AppCompatActivity {
         GlobalSpellList spellList = GlobalSpellList.getInstance();
         mSpells = spellList.getSpells();
 
-//        mSpells = Parcels.unwrap(getIntent().getParcelableExtra("spells"));
         int startingPosition = getIntent().getIntExtra("position", 0);
 
         adapterViewPager = new SpellPagerAdapter(getSupportFragmentManager(), mSpells);
