@@ -4,14 +4,13 @@ package com.cgrahams.spellbook.ui;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cgrahams.spellbook.GlobalSpellList;
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.model.Spell;
 
@@ -57,7 +56,7 @@ public class SpellDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        mSpells = Parcels.unwrap(getArguments().getParcelable("spells"));
-        GlobalSpellList spellList = GlobalSpellList.getInstance();
+        Util spellList = Util.getInstance();
         mSpells = spellList.getSpells();
         mPosition = getArguments().getInt("position");
         mSpell = mSpells.get(mPosition);

@@ -6,13 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cgrahams.spellbook.GlobalSpellList;
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.SpellListAdapter;
@@ -51,7 +50,7 @@ public class SpellSearchFragment extends Fragment {
     private void setUpFirebaseAdapter() {
 
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        GlobalSpellList mDatabaseInstance = GlobalSpellList.getInstance();
+        Util mDatabaseInstance = Util.getInstance();
         FirebaseDatabase mDatabase;
 
         mDatabase = mDatabaseInstance.getDatabase();

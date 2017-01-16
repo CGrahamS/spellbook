@@ -2,10 +2,9 @@ package com.cgrahams.spellbook.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
-import com.cgrahams.spellbook.GlobalSpellList;
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.model.Spell;
 import com.cgrahams.spellbook.ui.SpellDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -64,7 +63,7 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
             }
         });
 
-        GlobalSpellList spellList = GlobalSpellList.getInstance();
+        Util spellList = Util.getInstance();
         spellList.setSpells(mSpells);
     }
 

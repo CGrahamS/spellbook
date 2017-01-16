@@ -4,7 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.cgrahams.spellbook.GlobalSpellList;
+import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.SpellPagerAdapter;
 import com.cgrahams.spellbook.model.Spell;
@@ -24,7 +24,7 @@ public class SpellDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spell_detail);
         mViewPager = (ViewPager) findViewById(R.id.spellDetailViewPager);
-        GlobalSpellList spellList = GlobalSpellList.getInstance();
+        Util spellList = Util.getInstance();
         mSpells = spellList.getSpells();
 
         int startingPosition = getIntent().getIntExtra("position", 0);
