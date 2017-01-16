@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cgrahams.spellbook.GlobalSpellList;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.SpellListAdapter;
@@ -49,9 +50,13 @@ public class SpellSearchFragment extends Fragment {
 
     private void setUpFirebaseAdapter() {
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        Query query = FirebaseDatabase
-                .getInstance()
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        GlobalSpellList mDatabaseInstance = GlobalSpellList.getInstance();
+        FirebaseDatabase mDatabase;
+
+        mDatabase = mDatabaseInstance.getDatabase();
+
+        Query query = mDatabase
                 .getReference()
                 .child("Spells");
 

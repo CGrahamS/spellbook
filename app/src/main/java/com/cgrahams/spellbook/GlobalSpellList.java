@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class GlobalSpellList {
     public static final String TAG = GlobalSpellList.class.getSimpleName();
     private static GlobalSpellList instance;
+    private static FirebaseDatabase mDatabase;
     ArrayList<Spell> mSpells = new ArrayList<>();
 
     public ArrayList<Spell> getSpells() {
@@ -37,6 +38,14 @@ public class GlobalSpellList {
             instance=new GlobalSpellList();
         }
         return instance;
+    }
+
+    public static FirebaseDatabase getDatabase() {
+        if (mDatabase == null) {
+            mDatabase = FirebaseDatabase.getInstance();
+            mDatabase.setPersistenceEnabled(true);
+        }
+        return mDatabase;
     }
 
 }
