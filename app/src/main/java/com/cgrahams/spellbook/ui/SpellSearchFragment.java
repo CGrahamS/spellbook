@@ -23,6 +23,7 @@ import com.cgrahams.spellbook.Util;
 import com.cgrahams.spellbook.R;
 import com.cgrahams.spellbook.adapters.FirebaseSpellViewHolder;
 import com.cgrahams.spellbook.adapters.SpellListAdapter;
+import com.cgrahams.spellbook.adapters.SpellQueryAdapter;
 import com.cgrahams.spellbook.model.Spell;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.FirebaseApp;
@@ -44,6 +45,8 @@ public class SpellSearchFragment extends Fragment {
     private String queryParameter = null;
     Util mDatabaseInstance = Util.getInstance();
     FirebaseDatabase mDatabase = mDatabaseInstance.getDatabase();
+    ArrayList<Spell> globalSpells;
+    ArrayList<Spell> queriedSpells;
 
     public SpellSearchFragment() {
         // Required empty public constructor
@@ -66,6 +69,8 @@ public class SpellSearchFragment extends Fragment {
         mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
         mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
         setUpFirebaseAdapter(query);
+        globalSpells = mDatabaseInstance.getSpells();
+        queriedSpells = mDatabaseInstance.getQueriedSpells();
         return view;
     }
 
@@ -81,19 +86,21 @@ public class SpellSearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String searchQuery) {
-//                if (spell.getName() != null && spell.getName().toLowerCase().contains(queryParameter.toLowerCase())) {
-//                    mSpells.add(spell);
-//                    spellList.setSpells(mSpells);
-//                    notifyDataSetChanged();
-//                }
+                queriedSpells.clear();
+                for (Spell spell: globalSpells) {
+                    if (spell.getName() != null && spell.getName().toLowerCase().contains(searchQuery.toLowerCase())) {
+                        queriedSpells.add(spell);
+                        Log.d(TAG, "onQueryTextSubmit: " + spell.getName());
+                    }
+                }
+                setUpSpellQueryAdapter(queriedSpells);
                 searchView.clearFocus();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<Spell> spellList = mDatabaseInstance.getSpells();
-                for (Spell spell : spellList) {
+                for (Spell spell : globalSpells) {
                     if (spell.getName() != null && spell.getName().toLowerCase().contains(newText.toLowerCase())) {
                         Log.d(TAG, "onQueryTextChange: " + spell.getName());
                     }
@@ -103,7 +110,7 @@ public class SpellSearchFragment extends Fragment {
         });
     }
 
-    private void setUpFirebaseAdapter(final Query query) {
+    private void setUpFirebaseAdapter(Query query) {
 
         mFirebaseAdapter = new SpellListAdapter(Spell.class, R.layout.spell_list_item,
                 FirebaseSpellViewHolder.class, query, getActivity());
@@ -120,6 +127,25 @@ public class SpellSearchFragment extends Fragment {
                 mFirebaseAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void setUpSpellQueryAdapter(ArrayList<Spell> queriedSpells) {
+
+        final SpellQueryAdapter mSpellQueryAdapter = new SpellQueryAdapter(getContext(), queriedSpells);
+        mSpellSearchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        mSpellSearchRecyclerView.setHasFixedSize(true);
+        mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
+        mSpellSearchRecyclerView.setAdapter(mSpellQueryAdapter);
+
+        mSpellQueryAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount) {
+                super.onItemRangeChanged(positionStart, itemCount);
+                mSpellQueryAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
