@@ -14,15 +14,24 @@ public class Util {
     private static Util instance;
     private static FirebaseDatabase mDatabase;
     ArrayList<Spell> mSpells = new ArrayList<>();
+    ArrayList<Spell> mQueriedSpells = new ArrayList<>();
+
+    private Util(){}
 
     public ArrayList<Spell> getSpells() {
         return mSpells;
     }
 
-    private Util(){}
-
     public void setSpells(ArrayList<Spell> mSpells) {
         this.mSpells = mSpells;
+    }
+
+    public ArrayList<Spell> getQueriedSpells() {
+        return mQueriedSpells;
+    }
+
+    public void setQueriedSpells(ArrayList<Spell> mQueriedSpells) {
+        this.mQueriedSpells = mQueriedSpells;
     }
 
     public static FirebaseDatabase getDatabase() {

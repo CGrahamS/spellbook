@@ -2,6 +2,7 @@ package com.cgrahams.spellbook.ui;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
@@ -40,6 +41,7 @@ public class SpellSearchFragment extends Fragment {
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Query query;
+    private String queryParameter = null;
     Util mDatabaseInstance = Util.getInstance();
     FirebaseDatabase mDatabase = mDatabaseInstance.getDatabase();
 
@@ -48,16 +50,21 @@ public class SpellSearchFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(getActivity());
+        query = mDatabase
+                .getReference(Constants.SPELL_REF_KEY);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_spell_search, container);
         mLayoutManager = new LinearLayoutManager(view.getContext());
-        setHasOptionsMenu(true);
-        FirebaseApp.initializeApp(getActivity());
         mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
         mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
-        query = mDatabase
-                .getReference(Constants.SPELL_REF_KEY);
         setUpFirebaseAdapter(query);
         return view;
     }
@@ -74,18 +81,11 @@ public class SpellSearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextSubmit(String searchQuery) {
-//                query = mDatabase
-//                        .getReference(Constants.SPELL_REF_KEY)
-//                        .orderByChild("name")
-//                        .equalTo(searchQuery);
-//                setUpFirebaseAdapter(query);
-                ArrayList<Spell> queryList = new ArrayList<>();
-                ArrayList<Spell> spellList = mDatabaseInstance.getSpells();
-                for (Spell spell : spellList) {
-                    if (spell.getName() != null && spell.getName().toLowerCase().contains(searchQuery)) {
-                        Log.d(TAG, "onQueryTextSubmit: " + spell.getName());
-                    }
-                }
+//                if (spell.getName() != null && spell.getName().toLowerCase().contains(queryParameter.toLowerCase())) {
+//                    mSpells.add(spell);
+//                    spellList.setSpells(mSpells);
+//                    notifyDataSetChanged();
+//                }
                 searchView.clearFocus();
                 return false;
             }
@@ -103,12 +103,13 @@ public class SpellSearchFragment extends Fragment {
         });
     }
 
-    private void setUpFirebaseAdapter(Query query) {
+    private void setUpFirebaseAdapter(final Query query) {
+
         mFirebaseAdapter = new SpellListAdapter(Spell.class, R.layout.spell_list_item,
                 FirebaseSpellViewHolder.class, query, getActivity());
         mSpellSearchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mSpellSearchRecyclerView.setHasFixedSize(true);
-        mSpellSearchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
         mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {

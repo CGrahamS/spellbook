@@ -32,43 +32,41 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
     private ArrayList<Spell> mSpells = new ArrayList<>();
 
     public SpellListAdapter(Class<Spell> modelClass, int modelLayout,
-                                   Class<FirebaseSpellViewHolder> viewHolderClass,
-                                   Query ref, Context context) {
+                            Class<FirebaseSpellViewHolder> viewHolderClass,
+                            Query ref, Context context) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         mRef = ref.getRef();
         mContext = context;
         final Util spellList = Util.getInstance();
 
-        mChildEventListener = mRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                mSpells.add(dataSnapshot.getValue(Spell.class));
-                spellList.setSpells(mSpells);
-            }
+            mChildEventListener = mRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        mSpells.add(dataSnapshot.getValue(Spell.class));
+                        spellList.setSpells(mSpells);
+                }
 
-            //TODO add handler for updating spells
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                //TODO add handler for updating spells
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
 
-            }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
+                }
+            });
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
-
 
     @Override
     protected void populateViewHolder(final FirebaseSpellViewHolder viewHolder, Spell model, int position) {
