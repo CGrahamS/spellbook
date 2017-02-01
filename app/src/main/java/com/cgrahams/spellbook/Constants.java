@@ -7,4 +7,5 @@ package com.cgrahams.spellbook;
 public class Constants {
     public static final String SPELL_REF_KEY = "Spells";
     public static final String POSITION_KEY = "position";
+    public static final String ORIGIN_KEY = "origin";
 }

@@ -35,9 +35,9 @@ public class FirebaseSpellViewHolder extends RecyclerView.ViewHolder {
 
         //Add spell level if not a cantrip
         if (spell.getLevel() == 0) {
-            spellLevelTextView.setText("| Cantrip");
+            spellLevelTextView.setText("Cantrip");
         } else {
-            spellLevelTextView.setText("| Level " + Integer.toString(spell.getLevel()));
+            spellLevelTextView.setText("Level " + Integer.toString(spell.getLevel()));
         }
 
         //Add ritual text if ritual

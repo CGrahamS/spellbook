@@ -2,6 +2,7 @@ package com.cgrahams.spellbook;
 
 import com.cgrahams.spellbook.model.Spell;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class Util {
     public static final String TAG = Util.class.getSimpleName();
     private static Util instance;
     private static FirebaseDatabase mDatabase;
+    private static Query query;
     ArrayList<Spell> mSpells = new ArrayList<>();
     ArrayList<Spell> mQueriedSpells = new ArrayList<>();
 
@@ -40,6 +42,13 @@ public class Util {
             mDatabase.setPersistenceEnabled(true);
         }
         return mDatabase;
+    }
+
+    public static Query getSpellListQuery() {
+        if (query == null) {
+            query = mDatabase.getReference(Constants.SPELL_REF_KEY);
+        }
+        return query;
     }
 
     public static synchronized Util getInstance() {

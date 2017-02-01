@@ -49,7 +49,6 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
                 //TODO add handler for updating spells
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
@@ -76,6 +75,7 @@ public class SpellListAdapter extends FirebaseRecyclerAdapter<Spell, FirebaseSpe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SpellDetailActivity.class);
+                intent.putExtra(Constants.ORIGIN_KEY, SpellListAdapter.class.getSimpleName());
                 intent.putExtra(Constants.POSITION_KEY, viewHolder.getAdapterPosition());
                 mContext.startActivity(intent);
             }

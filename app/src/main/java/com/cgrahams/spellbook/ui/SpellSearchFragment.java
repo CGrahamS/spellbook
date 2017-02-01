@@ -58,6 +58,8 @@ public class SpellSearchFragment extends Fragment {
         FirebaseApp.initializeApp(getActivity());
         query = mDatabase
                 .getReference(Constants.SPELL_REF_KEY);
+        globalSpells = mDatabaseInstance.getSpells();
+        queriedSpells = mDatabaseInstance.getQueriedSpells();
         setHasOptionsMenu(true);
     }
 
@@ -69,9 +71,13 @@ public class SpellSearchFragment extends Fragment {
         mSearchFragmentHeaderTextView = (TextView) view.findViewById(R.id.searchFragmentHeaderTextView);
         mSpellSearchRecyclerView = (RecyclerView) view.findViewById(R.id.spellSearchRecyclerView);
         setUpFirebaseAdapter(query);
-        globalSpells = mDatabaseInstance.getSpells();
-        queriedSpells = mDatabaseInstance.getQueriedSpells();
         return view;
+    }
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        super.onOptionsMenuClosed(menu);
+        setUpFirebaseAdapter(query);
     }
 
     @Override
@@ -90,7 +96,6 @@ public class SpellSearchFragment extends Fragment {
                 for (Spell spell: globalSpells) {
                     if (spell.getName() != null && spell.getName().toLowerCase().contains(searchQuery.toLowerCase())) {
                         queriedSpells.add(spell);
-                        Log.d(TAG, "onQueryTextSubmit: " + spell.getName());
                     }
                 }
                 setUpSpellQueryAdapter(queriedSpells);
@@ -100,14 +105,19 @@ public class SpellSearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                queriedSpells.clear();
                 for (Spell spell : globalSpells) {
                     if (spell.getName() != null && spell.getName().toLowerCase().contains(newText.toLowerCase())) {
-                        Log.d(TAG, "onQueryTextChange: " + spell.getName());
+                        queriedSpells.add(spell);
                     }
+                    
                 }
+                setUpSpellQueryAdapter(queriedSpells);
                 return false;
             }
         });
+
+
     }
 
     private void setUpFirebaseAdapter(Query query) {
@@ -118,6 +128,8 @@ public class SpellSearchFragment extends Fragment {
         mSpellSearchRecyclerView.setHasFixedSize(true);
         mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
         mSpellSearchRecyclerView.setAdapter(mFirebaseAdapter);
+        mSpellSearchRecyclerView.invalidate();
+        mFirebaseAdapter.notifyDataSetChanged();
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 
@@ -130,12 +142,13 @@ public class SpellSearchFragment extends Fragment {
     }
 
     private void setUpSpellQueryAdapter(ArrayList<Spell> queriedSpells) {
-
         final SpellQueryAdapter mSpellQueryAdapter = new SpellQueryAdapter(getContext(), queriedSpells);
         mSpellSearchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mSpellSearchRecyclerView.setHasFixedSize(true);
         mSpellSearchRecyclerView.setLayoutManager(mLayoutManager);
         mSpellSearchRecyclerView.setAdapter(mSpellQueryAdapter);
+        mSpellSearchRecyclerView.invalidate();
+        mSpellQueryAdapter.notifyDataSetChanged();
 
         mSpellQueryAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 

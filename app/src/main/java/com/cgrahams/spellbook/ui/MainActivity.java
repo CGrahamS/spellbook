@@ -13,7 +13,6 @@ import com.cgrahams.spellbook.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    TextView mMainHeaderTextView;
     Button mMainSearchButton;
 
     @Override
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mMainSearchButton = (Button) findViewById(R.id.mainSearchButton);
         mMainSearchButton.setOnClickListener(this);
-
     }
 
     @Override
@@ -31,11 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, SpellSearchActivity.class);
             startActivity(intent);
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 }
 

@@ -26,9 +26,15 @@ public class SpellDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spell_detail);
         mViewPager = (ViewPager) findViewById(R.id.spellDetailViewPager);
         Util spellList = Util.getInstance();
-        mSpells = spellList.getSpells();
 
+        String origin = getIntent().getStringExtra(Constants.ORIGIN_KEY);
         int startingPosition = getIntent().getIntExtra(Constants.POSITION_KEY, 0);
+
+        if (origin.equals("SpellQueryAdapter")) {
+            mSpells = spellList.getQueriedSpells();
+        } else {
+            mSpells = spellList.getSpells();
+        }
 
         adapterViewPager = new SpellPagerAdapter(getSupportFragmentManager(), mSpells);
         mViewPager.setAdapter(adapterViewPager);
